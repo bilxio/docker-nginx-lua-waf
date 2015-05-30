@@ -2,15 +2,7 @@ FROM bilxio/ubuntu:14.04
 
 MAINTAINER Xiong Zhengdong <haibxz@gmail.com>
 
-
 ENV PROXY_REDIRECT_IP 12.34.56.78
-
-
-# RUN apt-get update && apt-get install -y
-# RUN apt-get update && apt-get install curl -y
-
-#RUN apt-get update && \
-#		DEBIAN_FRONTEND=noninteractive apt-get install -y libssl-dev
 
 RUN echo "#########################" && \
     echo " install LuaJIT" && \
@@ -60,7 +52,12 @@ ADD src/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-VOLUME ["/usr/local/nginx/conf", "/var/log/nginx"]
+# create a directory to store hack logs
+RUN mkdir -p /usr/local/nginx/logs/hack/ && \
+  chown nginx:nginx /usr/local/nginx/logs/hack && \
+  chmod 766 /usr/local/nginx/logs/hack
+
+VOLUME ["/usr/local/nginx", "/var/log/nginx"]
 
 EXPOSE 80
 CMD ["/entrypoint.sh"]
