@@ -35,7 +35,7 @@ docker run -d -p 8080:80 -e PROXY_REDIRECT_IP=10.10.10.9 \
 	bilxio/nginx-lua-waf
 ```
 
-### Enable "CC" attach defense
+### Enable "CC" attack defense
 Open src/waf/config.lua, change `CCDeny="off"` to `CCDeny="on"`
 
 ### "CC" defense rate
