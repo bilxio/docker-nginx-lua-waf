@@ -46,4 +46,4 @@ docker run -d -p 8080:80 -e PROXY_REDIRECT_IP=10.10.10.9 \
 
 ## 致谢
 
-- WAF 部分的 Lua 脚本移植自这里 [https://github.com/loveshell/ngx_lua_waf]
+- WAF 部分的 Lua 脚本移植自这里 [loveshell/ngx_lua_waf](https://github.com/loveshell/ngx_lua_waf)
