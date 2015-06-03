@@ -3,14 +3,16 @@ FROM bilxio/ubuntu:14.04
 MAINTAINER Xiong Zhengdong <haibxz@gmail.com>
 
 ENV PROXY_REDIRECT_IP 12.34.56.78
+ENV LUAJIT_VERSION 2.0.4
+ENV NGINX_VERSION 1.7.6
 
 RUN echo "#########################" && \
     echo " install LuaJIT" && \
     echo "#########################" && \
     cd /usr/local/src && \
-		wget "http://luajit.org/download/LuaJIT-2.0.3.tar.gz" && \
-    tar -zxvf LuaJIT-2.0.3.tar.gz && \
-    cd LuaJIT-2.0.3 && \
+		wget "http://luajit.org/download/LuaJIT-${LUAJIT_VERSION}.tar.gz" && \
+    tar -zxvf LuaJIT-${LUAJIT_VERSION}.tar.gz && \
+    cd LuaJIT-${LUAJIT_VERSION} && \
     make && \
     make PREFIX=/usr/local/luajit install && \
     adduser nginx && \
@@ -24,9 +26,9 @@ RUN echo "#########################" && \
     echo "#########################" && \
     echo " install nginx" && \
     echo "#########################" && \
-    wget http://nginx.org/download/nginx-1.7.6.tar.gz && \
-    tar xf nginx-1.7.6.tar.gz && \
-    cd nginx-1.7.6 && \
+    wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+    tar xf nginx-${NGINX_VERSION}.tar.gz && \
+    cd nginx-${NGINX_VERSION} && \
     ./configure --prefix=/usr/local/nginx \
       --user=nginx \
       --group=nginx \

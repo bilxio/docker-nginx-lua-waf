@@ -38,7 +38,7 @@ nginx安装路径假设为:/usr/local/nginx/conf/
 
 配置config.lua里的waf规则目录(一般在waf/conf/目录下)
 
-        RulePath = "/usr/local/nginx/conf/waf/wafconf/"
+        RULE_PATH = "/usr/local/nginx/conf/waf/wafconf/"
 
 绝对路径如有变动，需对应修改
 
@@ -47,31 +47,31 @@ nginx安装路径假设为:/usr/local/nginx/conf/
 
 ###配置文件详细说明：
 
-    	RulePath = "/usr/local/nginx/conf/waf/wafconf/"
+    	RULE_PATH = "/usr/local/nginx/conf/waf/wafconf/"
         --规则存放目录
-        attacklog = "off"
-        --是否开启攻击信息记录，需要配置logdir
-        logdir = "/usr/local/nginx/logs/hack/"
+        ATTACK_LOG = "off"
+        --是否开启攻击信息记录，需要配置LOG_DIR
+        LOG_DIR = "/usr/local/nginx/logs/hack/"
         --log存储目录，该目录需要用户自己新建，切需要nginx用户的可写权限
-        UrlDeny="on"
+        URL_DENY="on"
         --是否拦截url访问
-        Redirect="on"
+        REDIRECT="on"
         --是否拦截后重定向
-        CookieMatch = "on"
+        COOKIE_MATCH = "on"
         --是否拦截cookie攻击
-        postMatch = "on" 
+        POST_MATCH = "on" 
         --是否拦截post攻击
-        whiteModule = "on" 
+        WHITE_MODULE = "on" 
         --是否开启URL白名单
-        black_fileExt={"php","jsp"}
+        BLACK_FILE_EXT={"php","jsp"}
         --填写可上传文件后缀类型
-        ipWhitelist={"127.0.0.1"}
+        IP_LIST_WHITE={"127.0.0.1"}
         --ip白名单，多个ip用逗号分隔
-        ipBlocklist={"1.0.0.1"}
+        IP_LIST_BLOCK={"1.0.0.1"}
         --ip黑名单，多个ip用逗号分隔
-        CCDeny="on"
+        CC_DENY="on"
         --是否开启拦截cc攻击(需要nginx.conf的http段增加lua_shared_dict limit 10m;)
-        CCrate = "100/60"
+        CC_RATE = "100/60"
         --设置cc攻击频率，单位为秒.
         --默认1分钟同一个IP只能请求同一个地址100次
         html=[[Please go away~~]]
