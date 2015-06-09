@@ -202,6 +202,7 @@ end
 function denycc()
   if isCcDeny then
     local uri = ngx.var.uri
+    -- local args = ngx.var.args
     local CCcount = tonumber(string.match(CONFIG.CC_RATE,'(.*)/'))
     local CCseconds = tonumber(string.match(CONFIG.CC_RATE,'/(.*)'))
     local token = getClientIp()..uri
@@ -209,9 +210,10 @@ function denycc()
     local req,_ = limit:get(token)
     if req then
       if req > CCcount then
-        ngx.header.content_type = "text/html"
-        ngx.say("Yo, visit too frequently.")
-        ngx.exit(503)
+        ngx.header.content_type = "application/json"
+        ngx.status = ngx.HTTP_SERVICE_UNAVAILABLE
+        ngx.say('{"message":"Yo, visit too frequently."}')
+        ngx.exit(ngx.status)
         return true
       else
         limit:incr(token, 1)
